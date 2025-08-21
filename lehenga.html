@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Attire - Couture Collection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(244, 244, 244, 0.8); /* Transparent background */
+            color: #333;
+            text-align: center;
+            z-index: 1000;
+            padding: 20px 0;
+        }
+        .header h1 {
+            font-size: 3em; /* Increased title size */
+            margin: 0;
+        }
+        .content {
+            margin-top: 120px; /* Adjust to create space below the header */
+            padding: 20px;
+        }
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Space between images */
+            justify-content: center;
+        }
+        .image-container {
+            position: relative;
+            width: 300px; /* Fixed width for each image container */
+            text-align: center;
+        }
+        .image-container img {
+            width: 100%; /* Make images fill their container */
+            height: auto;
+            cursor: pointer;
+        }
+        .image-caption {
+            text-align: center;
+            font-size: 0.8em; /* Small font size */
+            margin-top: 5px; /* Adjust spacing */
+        }
+        .image-label {
+            font-size: 0.7em; /* Smaller font size for the label */
+            color: #777; /* Gray color for the label */
+        }
+        .price-on-request {
+            display: inline-block;
+            margin-top: 5px; /* Space between unique name and price on request */
+            font-size: 0.8em; /* Small font size */
+            text-decoration: underline; /* Underline effect */
+            cursor: pointer;
+            border: none; /* No border */
+            background-color: transparent; /* Transparent background */
+            color: #333; /* Text color */
+            transition: color 0.3s;
+        }
+        .price-on-request:hover {
+            color: #666; /* Darker text color on hover */
+        }
+        .icon-bar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .icon-bar i {
+            font-size: 1.5em;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .icon-bar i:hover {
+            color: #ff4081; /* Change color on hover */
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .popup h2 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .popup p {
+            margin: 0;
+            color: #666;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Royal Attire</h1>
+    </div>
+    <div class="content">
+        <div class="image-gallery">
+            <!-- Images will be dynamically added here -->
+        </div>
+    </div>
+
+    <div class="popup" id="likePopup">
+        <h2>Liked!</h2>
+        <p>You have liked this item.</p>
+    </div>
+
+    <script>
+        // Array of lehenga names and corresponding unique names and price request URLs
+        const lehengaDetails = [
+            { uniqueName: "Ethereal Elegance", priceRequestUrl: "price_request1.html" },
+            { uniqueName: "Royal Charm", priceRequestUrl: "price_request2.html" },
+            { uniqueName: "Mystic Mirage", priceRequestUrl: "price_request3.html" },
+            { uniqueName: "Gilded Glamour", priceRequestUrl: "price_request4.html" },
+            { uniqueName: "Opulent Aura", priceRequestUrl: "price_request5.html" },
+            { uniqueName: "Serenity Sparkle", priceRequestUrl: "price_request6.html" },
+            { uniqueName: "Majestic Marvel", priceRequestUrl: "price_request7.html" },
+            { uniqueName: "Regal Radiance", priceRequestUrl: "price_request8.html" },
+            { uniqueName: "Golden Grace", priceRequestUrl: "price_request9.html" },
+            { uniqueName: "Twilight Treasure", priceRequestUrl: "price_request10.html" },
+            { uniqueName: "Velvet Vista", priceRequestUrl: "price_request11.html" },
+            { uniqueName: "Radiant Reverie", priceRequestUrl: "price_request12.html" },
+            { uniqueName: "Silken Splendor", priceRequestUrl: "price_request13.html" },
+            { uniqueName: "Celestial Chic", priceRequestUrl: "price_request14.html" },
+            { uniqueName: "Moonlit Majesty", priceRequestUrl: "price_request15.html" },
+            { uniqueName: "Stellar Style", priceRequestUrl: "price_request16.html" },
+            { uniqueName: "Enchanted Elegance", priceRequestUrl: "price_request17.html" },
+            { uniqueName: "Divine Dream", priceRequestUrl: "price_request18.html" },
+            { uniqueName: "Aurora Allure", priceRequestUrl: "price_request19.html" },
+            { uniqueName: "Lavish Luxe", priceRequestUrl: "price_request20.html" },
+            { uniqueName: "Majestic Mirage", priceRequestUrl: "price_request21.html" },
+            { uniqueName: "Whispering Willow", priceRequestUrl: "price_request22.html" },
+            { uniqueName: "Mystic Moonlight", priceRequestUrl: "price_request23.html" },
+            { uniqueName: "Golden Grace", priceRequestUrl: "price_request24.html" },
+            { uniqueName: "Serene Symphony", priceRequestUrl: "price_request25.html" },
+            { uniqueName: "Lunar Luminance", priceRequestUrl: "price_request26.html" },
+            { uniqueName: "Opulent Opus", priceRequestUrl: "price_request27.html" },
+            { uniqueName: "Luminous Luster", priceRequestUrl: "price_request28.html" },
+            { uniqueName: "Ethereal Essence", priceRequestUrl: "price_request29.html" },
+            { uniqueName: "Twilight Tranquility", priceRequestUrl: "price_request30.html" }
+        ];
+
+        // Function to dynamically load images
+        function loadImages() {
+            const imageGallery = document.querySelector('.image-gallery');
+            for (let i = 1; i <= 30; i++) {
+                const imgSrc = `leh${i}.jpg`;
+                const imgAlt = `Lehenga ${i}`;
+                const lehenga = lehengaDetails[i - 1];
+
+                // Create image element
+                const imgElement = document.createElement('img');
+                imgElement.src = imgSrc;
+                imgElement.alt = imgAlt;
+
+                // Create container for image, label, caption, and price on request
+                const imageContainer = document.createElement('div');
+                imageContainer.classList.add('image-container');
+
+                // Create icon bar
+                const iconBar = document.createElement('div');
+                iconBar.classList.add('icon-bar');
+                const likeIcon = document.createElement('i');
+                likeIcon.classList.add('fas', 'fa-heart');
+                likeIcon.onclick = () => showPopup('likePopup');
+                const saveIcon = document.createElement('i');
+                saveIcon.classList.add('fas', 'fa-bookmark');
+                iconBar.appendChild(likeIcon);
+                iconBar.appendChild(saveIcon);
+
+                // Create label element
+                const labelElement = document.createElement('div');
+                labelElement.classList.add('image-label');
+                labelElement.textContent = 'Couture';
+
+                // Create caption element
+                const captionElement = document.createElement('div');
+                captionElement.classList.add('image-caption');
+                captionElement.textContent = lehenga.uniqueName;
+
+                // Create price on request button
+                const priceOnRequestElement = document.createElement('button');
+                priceOnRequestElement.classList.add('price-on-request');
+                priceOnRequestElement.textContent = 'Price on Request';
+                priceOnRequestElement.addEventListener('click', () => {
+                    window.location.href = lehenga.priceRequestUrl;
+                });
+
+                // Append elements to image container
+                imageContainer.appendChild(imgElement);
+                imageContainer.appendChild(iconBar);
+                imageContainer.appendChild(labelElement);
+                imageContainer.appendChild(captionElement);
+                imageContainer.appendChild(priceOnRequestElement);
+
+                // Append image container to gallery
+                imageGallery.appendChild(imageContainer);
+            }
+        }
+
+        // Function to show popup
+        function showPopup(popupId) {
+            const popup = document.getElementById(popupId);
+            popup.style.display = 'block';
+
+            // Hide popup after 2 seconds
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+
+        // Load images when the page is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            loadImages();
+        });
+    </script>
+</body>
+</html>
