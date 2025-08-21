@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Royal Attire - Lehengas collection.">
+    <title>Royal Attire</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/cssa2?family=Playfair+Display:wght@700&family=Bookman+Old+Style:wght@400&display=swap">
+    <style>
+        :root {
+            --text-color: white;
+            --background-color: white;
+            --title-background-color: black;
+            --button-background-color: black;
+            --title-color: #e3c8a8;
+            --subtitle-color: #555;
+            --line-color: #e3c8a8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Bookman Old Style', Arial, sans-serif;
+            background-color: var(--background-color);
+            overflow-x: hidden;
+        }
+
+        .header-section {
+            background-color: var(--title-background-color);
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .buttons-top {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .buttons-top button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+            background-color: var(--button-background-color);
+            color: var(--text-color);
+            outline: none;
+        }
+
+        .buttons-top button:focus {
+            border: 2px solid var(--text-color);
+        }
+
+        .buttons-top button:nth-child(2) {
+            border: 2px solid var(--text-color);
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            color: var(--title-color);
+            background-color: var(--title-background-color);
+            padding: 10px 20px;
+            margin-top: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 25px;
+            color: var(--subtitle-color);
+            position: relative;
+        }
+
+        .pictures-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .picture {
+            position: relative;
+            width: calc(25% - 20px);
+            margin: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .picture button {
+            border: none;
+            background: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .picture img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .picture:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-text-container {
+            text-align: center;
+            margin-top: 20px;
+            font-family: 'Bookman Old Style', Times, serif;
+            padding-top: 20px; /* Increased top padding */
+        }
+
+        .image-diffuse {
+            font-size: 16px; /* Increased font size */
+            color: grey;
+            margin-bottom: 10px; /* Increased margin bottom */
+        }
+
+        .image-text {
+            font-size: 18px; /* Increased font size */
+            color: black;
+            text-transform: uppercase;
+            margin-bottom: 10px; /* Increased margin bottom */
+        }
+
+        .image-price {
+            font-size: 16px; /* Increased font size */
+            color: grey;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 2% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            position: relative;
+            align-items: flex-start;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-img {
+            width: 30%;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .additional-images {
+            width: 10%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .additional-images img {
+            width: 100%;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s ease;
+        }
+
+        .additional-images img:hover {
+            border-color: #000;
+        }
+
+        .image-details {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+        }
+
+        .image-details .image-text-container {
+            margin-top: 0;
+        }
+
+        .add-to-cart-button {
+            background-color: var(--button-background-color);
+            color: var(--text-color);
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .size-options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .size-options .sizes-available {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .size-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .size-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            outline: none;
+            font-size: 16px;
+            border-radius: 15px; /* Adjusted oval shape */
+        }
+
+        .size-buttons button:hover {
+            border-color: #000;
+        }
+
+        .currency-options {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .currency-options select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            outline: none;
+            border-radius: 20px; /* Adjusted oval shape */
+        }
+
+        .currency-options select:hover {
+            border-color: #000;
+        }
+
+        .size-chart-link {
+            color: blue;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .size-chart-container {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .size-chart-container img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <section class="header-section">
+        <nav class="buttons-top">
+            <button onclick="location.href='couture.html'" aria-label="couture">COUTURE</button>
+            <button onclick="location.href='diffuse.html'" aria-label="diffuse">DIFFUSE</button>
+        </nav>
+        <h1 class="title">Royal Attire</h1>
+    </section>
+    <div class="subtitle-container">
+        <p class="subtitle">DIFFUSE-SAREE</p>
+    </div>
+    <div class="pictures-container">
+            
+             <div class="picture">
+                <button onclick="openModal('sa3.jpg', 'Printed Lehenga with Scoop Neck Blouse', 1982, ['sa3.jpg', 'sa3_1.jpg'], ['XS', 'S', 'M', 'L', 'XL'])">
+                    <img src="sa3.jpg" alt="Lehanga 3">
+                </button>
+                <div class="image-text-container">
+                    <p class="image-diffuse">DIFFUSE</p>
+                    <p class="image-text">Printed Lehenga with...</p>
+                    <p class="image-price" data-price="1982" data-currency="usd">MRP: $1982</p>
+                </div>
+            </div>
+             
+            <div class="picture">
+                <button onclick="openModal('sa4.jpg', 'Printed Lehenga with Scoop Neck Blouse', 1982, ['sa4.jpg','sa4_1.jpg'], ['XS', 'S', 'M', 'L', 'XL'])">
+                    <img src="sa4.jpg" alt="Lehanga 3">
+                </button>
+                <div class="image-text-container">
+                    <p class="image-diffuse">DIFFUSE</p>
+                    <p class="image-text">Printed Lehenga with...</p>
+                    <p class="image-price" data-price="1982" data-currency="usd">MRP: $1982</p>
+                </div>
+            </div>
+            <div class="picture">
+                <button onclick="openModal('sa7.jpg', 'Printed Lehenga with Scoop Neck Blouse', 1982, ['sa7.jpg', 'sa7_1.jpg','sa7_2.jpg'], ['XS', 'S', 'M', 'L', 'XL'])">
+                    <img src="sa7.jpg" alt="Lehanga 3">
+                </button>
+                <div class="image-text-container">
+                    <p class="image-diffuse">DIFFUSE</p>
+                    <p class="image-text">Printed Lehenga with...</p>
+                    <p class="image-price" data-price="1982" data-currency="usd">MRP: $1982</p>
+                </div>
+            </div>
+            <div class="picture">
+            <button onclick="openModal('sa1.jpg', 'Midriff Flaunt Top with Crossover of Prints and Tints with a Gharara', 949, ['sa1.jpg','sa1_1.jpg','sa1_2.jpg'], ['XS', 'S', 'M', 'L', 'XL'])">
+                <img src="sa1.jpg" alt="Lehanga 1">
+            </button>
+            <div class="image-text-container">
+                <p class="image-diffuse">DIFFUSE</p>
+                <p class="image-text">Midriff Flaunt Top with...</p>
+                <p class="image-price" data-price="949" data-currency="usd">MRP: $949</p>
+                </div>
+            </div>
+            <div class="picture">
+                <button onclick="openModal('sa5.jpg', 'Printed Lehenga with Scoop Neck Blouse', 1982, ['sa5.jpg','sa5_1.jpg'], ['XS', 'S', 'M', 'L', 'XL'])">
+                    <img src="sa5.jpg" alt="Lehanga 3">
+                </button>
+                <div class="image-text-container">
+                    <p class="image-diffuse">DIFFUSE</p>
+                    <p class="image-text">Printed Lehenga with...</p>
+                    <p class="image-price" data-price="1982" data-currency="usd">MRP: $1982</p>
+                </div>
+            </div>
+           
+            <div class="picture">
+                <button onclick="openModal('sa6.jpg', 'Printed Lehenga with Scoop Neck Blouse', 1982, ['sa6.jpg'], ['XS', 'S', 'M', 'L', 'XL'])">
+                    <img src="sa6.jpg" alt="Lehanga 3">
+                </button>
+                <div class="image-text-container">
+                    <p class="image-diffuse">DIFFUSE</p>
+                    <p class="image-text">Printed Lehenga with...</p>
+                    <p class="image-price" data-price="1982" data-currency="usd">MRP: $1982</p>
+                </div>
+            </div>
+            <div class="picture">
+                <button onclick="openModal('sa2.jpg', 'Diffuse Tasseled Blouse and Lehenga', 2390, ['sa2.jpg'], ['XS', 'S', 'M', 'L'])">
+                    <img src="sa2.jpg" alt="Lehanga 2">
+                </button>
+                <div class="image-text-container">
+                    <p class="image-diffuse">DIFFUSE</p>
+                    <p class="image-text">Diffuse Tasseled Blouse...</p>
+                    <p class="image-price" data-price="2390" data-currency="usd">MRP: $2390</p>
+                </div>
+            </div>
+            <div class="picture">
+                <button onclick="openModal('sa8.jpg', 'Printed Lehenga with Scoop Neck Blouse', 1982, ['sa8.jpg','sa8_1.jpg','sa8_2.jpg'], ['XS', 'S', 'M', 'L', 'XL'])">
+                    <img src="sa8.jpg" alt="Lehanga 3">
+                </button>
+                <div class="image-text-container">
+                    <p class="image-diffuse">DIFFUSE</p>
+                    <p class="image-text">Printed Lehenga with...</p>
+                    <p class="image-price" data-price="1982" data-currency="usd">MRP: $1982</p>
+                </div>
+            </div>
+            <!-- Add more pictures as needed -->
+        </div>
+    
+        <!-- Modal Section -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <img id="modal-main-img" class="modal-img" src="" alt="Modal Image">
+                <div class="additional-images" id="additional-images"></div>
+                <div class="image-details">
+                    <div class="image-text-container">
+                        <p id="modal-image-text" class="image-text"></p>
+                        <p class="image-diffuse">Traditions enriched by prints, a tasseled black blouse paired with a printed Lehenga and a metallic feather rimmed drape.</p>
+                    </div>
+                    <div class="size-options" id="size-options">
+                        <p class="sizes-available">Size:</p>
+                        <div class="size-buttons">
+                            <button>XL</button>
+                            <button>L</button>
+                            <button>M</button>
+                            <button>S</button>
+                            <button>XS</button>
+                        </div>
+                        <p class="size-chart-link">Size chart</p>
+                    </div>
+                    <div class="currency-options">
+                        <p id="modal-image-price" class="image-price"></p>
+                    </div>
+                    <button class="add-to-cart-button">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Size Chart Section -->
+        <div class="size-chart-container" id="size-chart-container">
+            <img src="size_chart.png" alt="Size Chart">
+        </div>
+    
+        <script>
+            const exchangeRates = {
+                eur: 0.85,
+                gbp: 0.75,
+                inr: 75.00,
+                usd: 1
+            };
+    
+            function openModal(imageSrc, imageText, price, additionalImages, sizes) {
+                document.getElementById('myModal').style.display = "block";
+                document.getElementById('modal-main-img').src = imageSrc;
+                document.getElementById('modal-image-text').innerText = imageText;
+                document.getElementById('modal-image-price').innerText = `MRP: $${price}`;
+    
+                const additionalImagesContainer = document.getElementById('additional-images');
+                additionalImagesContainer.innerHTML = '';
+                additionalImages.forEach(img => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = img;
+                    imgElement.onclick = () => { document.getElementById('modal-main-img').src = img; };
+                    additionalImagesContainer.appendChild(imgElement);
+                });
+    
+                updateSizes(sizes); // Update size options dynamically
+                updateCurrency(); // Update currency display
+            }
+    
+            function changeCurrency(currency) {
+                const priceElements = document.querySelectorAll('.image-price, #modal-image-price');
+                priceElements.forEach(el => {
+                    const priceInUSD = el.getAttribute('data-price');
+                    const convertedPrice = (priceInUSD * exchangeRates[currency]).toFixed(2);
+                    const currencySymbol = currency === 'eur' ? '€' : currency === 'gbp' ? '£' : currency === 'inr' ? '₹' : '$';
+                    el.innerText = `MRP: ${currencySymbol}${convertedPrice}`;
+                    el.setAttribute('data-currency', currency);
+                });
+            }
+    
+            function closeModal() {
+                document.getElementById('myModal').style.display = "none";
+            }
+    
+            function updateSizes(sizes) {
+                const sizeButtonsContainer = document.querySelector('.size-buttons');
+                sizeButtonsContainer.innerHTML = '';
+                sizes.forEach(size => {
+                    const sizeButton = document.createElement('button');
+                    sizeButton.innerText = size;
+                    sizeButton.onclick = () => { /* size selection logic */ };
+                    sizeButtonsContainer.appendChild(sizeButton);
+                });
+            }
+        </script>
+    </body>
+    </html>
+    

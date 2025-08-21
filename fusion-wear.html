@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Attire - Couture Collection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(244, 244, 244, 0.8);
+            color: #333;
+            text-align: center;
+            z-index: 1000;
+            padding: 20px 0;
+        }
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        .content {
+            margin-top: 120px;
+            padding: 20px;
+        }
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .image-container {
+            position: relative;
+            width: 300px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+        .image-caption {
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+        .image-label {
+            font-size: 0.8em;
+            color: #777;
+            margin-bottom: 8px;
+        }
+        .price-on-request {
+            display: block;
+            margin: 10px auto;
+            font-size: 0.8em;
+            text-decoration: underline;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            color: #333;
+            transition: color 0.3s;
+        }
+        .price-on-request:hover {
+            color: #666;
+        }
+        .icon-bar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .icon-bar i {
+            font-size: 1.5em;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .icon-bar i:hover {
+            color: #ff4081;
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .popup h2 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .popup p {
+            margin: 0;
+            color: #666;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.5s;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+            position: relative;
+        }
+        .modal-header, .modal-body, .modal-footer {
+            padding: 10px;
+        }
+        .modal-header {
+            border-bottom: 1px solid #ddd;
+        }
+        .modal-header h2 {
+            margin: 0;
+        }
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .modal-body img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        .modal-body .modal-images {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .modal-body .modal-images img {
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+        .modal-body .modal-images img:hover {
+            transform: scale(1.1);
+        }
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        .modal-footer .size-chart, .modal-footer .delivery-weeks, .modal-footer .price {
+            flex: 1;
+        }
+        .modal-footer .add-to-cart {
+            flex: 1;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .size-dropdown {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Royal Attire</h1>
+    </div>
+    <div class="content">
+        <div class="image-gallery">
+            <!-- Images will be dynamically added here -->
+        </div>
+    </div>
+
+    <div class="popup" id="likePopup">
+        <h2>Liked!</h2>
+        <p>You have liked this item.</p>
+    </div>
+
+    <!-- Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalName"></h2>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Selected fusion-wear">
+                <p id="modalDescription">Detailed description of the selected fusion-wear.</p>
+                <div class="modal-prices">
+                    <p id="modalPriceINR"></p>
+                    <p id="modalPriceUSD"></p>
+                    <p id="modalPriceEUR"></p>
+                </div>
+                <div class="size-chart">
+                    <label for="sizeDropdown">Size:</label>
+                    <select id="sizeDropdown" class="size-dropdown">
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                        <option value="extra-large">Extra Large</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="add-to-cart">
+                    <button onclick="addToCart()">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Array of fusion-wear details including unique name, price, and price request URLs
+        const fusionWearDetails = [
+            { uniqueName: "Ethereal Elegance", price: { INR: 125000, USD: 1600, EUR: 1400 }, imgSrc: "fus1.jpg" },
+            { uniqueName: "Royal Charm", price: { INR: 145000, USD: 1850, EUR: 1600 }, imgSrc: "fus2.jpg" },
+            { uniqueName: "Mystic Mirage", price: { INR: 135000, USD: 1730, EUR: 1500 }, imgSrc: "fus3.jpg" },
+            { uniqueName: "Silken Symphony", price: { INR: 155000, USD: 1980, EUR: 1720 } ,imgSrc: "fus4.jpg" },
+    { uniqueName: "Enchanted Elegance", price: { INR: 165000, USD: 2110, EUR: 1830 } ,imgSrc: "fus5.jpg" },
+    { uniqueName: "Opulent Opus", price: { INR: 175000, USD: 2240, EUR: 1950} ,imgSrc:"fus6.jpg"},
+    { uniqueName: "Radiant Rhapsody", price: { INR: 185000, USD: 2370, EUR: 2060 },imgSrc:"fus7.jpg" },
+    { uniqueName: "Majestic Marvel", price: { INR: 195000, USD: 2500, EUR: 2170 },imgSrc:"fus8.jpg"},
+    { uniqueName: "Regal Reflection", price: { INR: 205000, USD: 2630, EUR: 2280 },imgSrc:"fus9.jpg" },
+    { uniqueName: "Glamorous Gala", price: { INR: 215000, USD: 2760, EUR: 2390 } ,imgSrc:"fus10.jpg"},
+    { uniqueName: "Splendid Serenade", price: { INR: 225000, USD: 2890, EUR: 2510 } ,imgSrc:"fus11.jpg"},
+    { uniqueName: "Divine Dream", price: { INR: 235000, USD: 3020, EUR: 2620 },imgSrc:"fus12.jpg" },
+    { uniqueName: "Celestial Celebration", price: { INR: 245000, USD: 3150, EUR: 2730 },imgSrc:"fus13.jpg" },
+    { uniqueName: "Exquisite Euphoria", price: { INR: 255000, USD: 3280, EUR: 2850 } ,imgSrc:"fus14.jpg"},
+    { uniqueName: "Harmonious Hues", price: { INR: 265000, USD: 3410, EUR: 2960 },imgSrc:"fus15.jpg"},
+    { uniqueName: "Serene Symphony", price: { INR: 275000, USD: 3540, EUR: 3070 },imgSrc:"fus16.jpg" },
+    { uniqueName: "Tranquil Treasure", price: { INR: 285000, USD: 3670, EUR: 3190 },imgSrc:"fus17.jpg" },
+    { uniqueName: "Blissful Bloom", price: { INR: 295000, USD: 3800, EUR: 3300 },imgSrc:"fus18.jpg" },
+    { uniqueName: "Enigmatic Essence", price: { INR: 305000, USD: 3930, EUR: 3410 } ,imgSrc:"fus19.jpg"},
+    { uniqueName: "Opulent Oasis", price: { INR: 315000, USD: 4060, EUR: 3520 },imgSrc:"fus20.jpg"},
+    { uniqueName: "Sapphire Splendor", price: { INR: 325000, USD: 4190, EUR: 3630 },imgSrc:"fus21.jpg" },
+    { uniqueName: "Majestic Moonlight", price: { INR: 335000, USD: 4320, EUR: 3740 },imgSrc:"fus22.jpg" },
+    { uniqueName: "Radiant Rainbows", price: { INR: 345000, USD: 4450, EUR: 3850 },imgSrc:"fus23.jpg" },
+    { uniqueName: "Glistening Glory", price: { INR: 355000, USD: 4580, EUR: 3960 },imgSrc:"fus24.jpg"},
+    { uniqueName: "Crimson Cascade", price: { INR: 365000, USD: 4710, EUR: 4080 },imgSrc:"fus25.jpg" },
+    { uniqueName: "Dazzling Dusk", price: { INR: 375000, USD: 4840, EUR: 4190 },imgSrc:"fus26.jpg"},
+    { uniqueName: "Lavish Luster", price: { INR: 385000, USD: 4970, EUR: 4300 },imgSrc:"fus27.jpg" },
+    { uniqueName: "Golden Grace", price: { INR: 395000, USD: 5100, EUR: 4410 },imgSrc:"fus28.jpg" },
+    { uniqueName: "Blazing Beauty", price: { INR: 405000, USD: 5230, EUR: 4520 },imgSrc:"fus29.jpg" },
+    { uniqueName: "Mystical Mosaic", price: { INR: 415000, USD: 5360, EUR: 4630 },imgSrc:"fus30.jpg" }
+
+ 
+            // Add more items as needed
+        ];
+
+        // Function to dynamically load images and set up click handlers
+        function loadImages() {
+            const imageGallery = document.querySelector('.image-gallery');
+            fusionWearDetails.forEach((fusionWear, index) => {
+                const imageContainer = document.createElement('div');
+                imageContainer.classList.add('image-container');
+
+                const img = document.createElement('img');
+                img.src = fusionWear.imgSrc;
+                img.alt = fusionWear.uniqueName;
+                img.onclick = () => openModal(fusionWear);
+
+                const caption = document.createElement('div');
+                caption.classList.add('image-caption');
+                caption.innerHTML = `<p>${fusionWear.uniqueName}</p><p class="image-label">Price: ${fusionWear.price.INR.toLocaleString()} INR</p><button class="price-on-request" onclick="openModalPriceRequest(${index})">Price on Request</button>`;
+
+                imageContainer.appendChild(img);
+                imageContainer.appendChild(caption);
+                imageGallery.appendChild(imageContainer);
+            });
+        }
+
+        // Function to open modal with specific fusion-wear details
+        function openModal(fusionWear) {
+            document.getElementById('modalName').textContent = fusionWear.uniqueName;
+            document.getElementById('modalImage').src = fusionWear.imgSrc;
+            document.getElementById('modalDescription').textContent = `Detailed description of ${fusionWear.uniqueName}.`;
+            document.getElementById('modalPriceINR').textContent = `INR: ₹${fusionWear.price.INR.toLocaleString()}`;
+            document.getElementById('modalPriceUSD').textContent = `USD: $${fusionWear.price.USD.toLocaleString()}`;
+            document.getElementById('modalPriceEUR').textContent = `EUR: €${fusionWear.price.EUR.toLocaleString()}`;
+            document.getElementById('detailsModal').style.display = 'block';
+        }
+
+        // Function to open modal with price on request
+        function openModalPriceRequest(index) {
+            const fusionWear = fusionWearDetails[index];
+            document.getElementById('modalName').textContent = fusionWear.uniqueName;
+            document.getElementById('modalImage').src = fusionWear.imgSrc;
+            document.getElementById('modalDescription').textContent = `Detailed description of ${fusionWear.uniqueName}.`;
+            document.getElementById('modalPriceINR').textContent ="";
+            document.getElementById('modalPriceUSD').textContent = "";
+            document.getElementById('modalPriceEUR').textContent = "";
+            document.getElementById('detailsModal').style.display = 'block';
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('detailsModal').style.display = 'none';
+        }
+
+        // Function to simulate adding to cart
+        function addToCart() {
+            alert('Item added to cart!');
+        }
+
+        // Initial function call to load images on page load
+        loadImages();
+    </script>
+</body>
+</html>

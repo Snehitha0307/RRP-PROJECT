@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Attire</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap">
+    <style>
+        /* CSS Variables */
+        :root {
+            --text-color: white;
+            --background-color: #f5f5f5;
+            --title-color: #e3c8a8;
+            --subtitle-color: #555;
+            --footer-bg-color: #333;
+            --footer-text-color: #fff;
+        }
+
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: var(--background-color);
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .full-height-section, .video-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .full-height-section video, .video-section video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .buttons-top {
+            display: flex;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .buttons-top button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            outline: none;
+            color: var(--text-color);
+        }
+
+        .buttons-top button:focus {
+            border: 2px solid var(--text-color);
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            color: var(--title-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+
+        .buttons-bottom {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .buttons-bottom button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            outline: none;
+            color: var(--text-color);
+        }
+
+        .buttons-bottom button:focus {
+            border: 2px solid var(--text-color);
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-style: italic;
+            text-align: center;
+            color: var(--subtitle-color);
+            margin: 40px 20px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+        }
+
+        .additional-videos {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+
+        .image-section {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border: 5px solid var(--title-color);
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            background-color: var(--footer-bg-color);
+            color: var(--footer-text-color);
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            clear: both;
+        }
+
+        .footer a {
+            color: var(--footer-text-color);
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 24px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .social-icons img {
+            width: 40px; /* Adjust size as needed */
+            height: auto;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px) {
+            .buttons-top {
+                flex-direction: column;
+                align-items: center;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .buttons-top button {
+                margin: 5px 0;
+            }
+
+            .title {
+                font-size: 36px;
+                margin-top: 10px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .buttons-bottom {
+                flex-direction: column;
+            }
+
+            .buttons-bottom button {
+                margin: 5px 0;
+            }
+            
+            .footer a {
+                font-size: 20px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <header class="full-height-section">
+        <video autoplay muted loop playsinline>
+            <source src="videoframe1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <nav class="buttons-top">
+            <button onclick="location.href='couture1.html'" aria-label="Couture">Couture</button>
+            <button onclick="location.href='fusion-wear.html'" aria-label="Diffuse">Diffuse</button>
+           </nav>
+        <h1 class="title">Royal Attire</h1>
+        <nav class="buttons-bottom">
+            <button aria-label="What's New">What's New</button>
+            <button aria-label="Women's Wear">Women's Wear</button>
+            <button aria-label="Accessories">Accessories</button>
+ <button onclick="location.href='highjewellery.html'" aria-label="High Jewellery">High Jewellery</button>
+            <button onclick="location.href='finejewellery.html'" aria-label="Fine Jewellery">Fine Jewellery</button>
+        </nav>
+    </header>
+
+    <h2 class="subtitle">"For culture to be relevant, it needs to be dynamic."</h2>
+
+    <section class="video-section">
+        <video autoplay muted loop playsinline>
+            <source src="videoframe2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
+
+    <section class="image-section">
+        <img src="wedding.jpg" alt="Wedding">
+        <img src="accessories.jpg" alt="Accessories">
+    </section>
+
+    <section class="additional-videos">
+        <div class="video-section">
+            <video controls>
+                <source src="videoframe2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Royal Attire. All rights reserved.</p>
+        <p>For inquiries, contact us at <a href="mailto:info@royalattire.com">info@royalattire.com</a></p>
+        <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram"><img src="https://www.flaticon.com/free-icons/instagram" alt="Instagram"></a>
+            <a href="https://snapchat.com" target="_blank" aria-label="Snapchat"><img src="snapchat.png" alt="Snapchat"></a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter"><img src="twitter.png" alt="Twitter"></a>
+            <a href="https://telegram.org" target="_blank" aria-label="Telegram"><img src="telegram.png" alt="Telegram"></a>
+        </div>
+    </footer>
+</body>
+</html>

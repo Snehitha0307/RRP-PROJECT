@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine Jewellery</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap">
+    <style>
+        :root {
+            --text-color: white;
+            --background-color: #f5f5f5;
+            --title-color: #e3c8a8;
+            --subtitle-color: #9e9e9e;
+            --footer-bg-color: #030303;
+            --footer-text-color: #fff;
+        }
+        /* Resetting default margin and padding */
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Setting body font and background */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5; /* Fallback background color */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Styling for the content section */
+        .content {
+    max-width: 100%; /* Adjust to 100% to fit the viewport */
+    margin: 20px auto;
+    text-align: center;
+    padding: 20px;
+    color: #3d3c3c; /* Dark text color */
+}
+
+
+        /* Styling for the main heading */
+        .content h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for the paragraph */
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #5a5959; /* Slightly darker text color */
+            margin-bottom: 20px;
+        }
+
+        /* Styling for images */
+        .content img {
+    max-width: 100%; /* Ensure images do not exceed the width of their container */
+    height: auto; /* Allow images to scale proportionally */
+    display: block; /* Ensure images do not have extra space below */
+    border: 5px solid #fff; /* White border */
+    margin: 0 auto 20px; /* Center align images with bottom margin */
+}
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    /* Gradient color */
+    background: linear-gradient(90deg, #000000, #333333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* Fallback solid color */
+    color: #000000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+
+
+
+        /* Styling for additional description */
+        .additional-description {
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .footer {
+            background-color: var(--footer-bg-color);
+            color: var(--footer-text-color);
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            clear: both;
+        }
+
+        .footer a {
+            color: var(--footer-text-color);
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 24px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .social-icons img {
+            width: 40px; /* Adjust size as needed */
+            height: auto;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px) {
+            .buttons-top {
+                flex-direction: column;
+                align-items: center;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .buttons-top button {
+                margin: 5px 0;
+            }
+
+            .title {
+                font-size: 36px;
+                margin-top: 10px;
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+
+            .buttons-bottom {
+                flex-direction: column;
+            }
+
+            .buttons-bottom button {
+                margin: 5px 0;
+            }
+            
+            .footer a {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="full-height-section">
+        <h1 class="title">FINE JEWELLERY</h1>
+    </header>
+
+    <div class="content">
+        <img src="highjewellery.jpg" alt="Fine Jewellery">
+        <h3>THE BENGAL TIGER ICON COLLECTION</h3>
+        <p>An homage to the iconic house insignia, the royal Bengal Tiger—its beauty, ferocity and strength. Timeless classics crafted in 18k gold with EF VVS VS diamonds.</p>
+        <img src="highjewellery3.jpg" alt="Another Image">
+        <div class="additional-description">
+        </div>
+        <img src="highjewellery2.jpg" alt="Bengal Royale Image">
+        <div class="additional-description">
+            <h3>TROPIC OF CALCUTTA</h3>
+            <p>A commitment to curiosities and fine craftsmanship. 
+                Coded classics crafted in 18k gold with multicoloured gemstones and EF VVS VS diamonds.</p>
+        </div>
+        <img src="highjewellery1.jpg" alt="Bengal Royale Image">
+        <div class="additional-description">
+            <h3>THE CHOWRINGHEE EARRINGS</h3>
+            <p> Crafted in 18k gold with South Sea pearls, black enamel and studded with EF VVS VS diamonds</p>
+            <p> “Midsummer afternoons in Calcutta clubs, ladies playing Mahjong.
+                 Organza saris, faces layered with compact, copious amounts of hairspray and painted lips pursed in fierce concentration. 
+                 Diamonds and pearls glinting in the sunlight."</p>
+        </div>
+            </div>
+    <footer class="footer">
+        <p>&copy; 2024 Royal Attire. All rights reserved.</p>
+        <p>For inquiries, contact us at <a href="mailto:info@royalattire.com">info@royalattire.com</a></p>
+        <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram"><img src="https://www.flaticon.com/free-icons/instagram" alt="Instagram"></a>
+            <a href="https://snapchat.com" target="_blank" aria-label="Snapchat"><img src="snapchat.png" alt="Snapchat"></a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter"><img src="twitter.png" alt="Twitter"></a>
+            <a href="https://telegram.org" target="_blank" aria-label="Telegram"><img src="telegram.png" alt="Telegram"></a>
+        </div>
+    </footer>
+</body>
+</html>

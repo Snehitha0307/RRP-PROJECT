@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Sarees Collection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(244, 244, 244, 0.8);
+            color: #333;
+            text-align: center;
+            z-index: 1000;
+            padding: 20px 0;
+        }
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        .content {
+            margin-top: 120px;
+            padding: 20px;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+        .image-container {
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+        .image-caption {
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+        .image-label {
+            font-size: 0.8em;
+            color: #777;
+            margin-bottom: 8px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .modal-header {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .modal-header h2 {
+            margin: 0;
+        }
+        .modal-body {
+            padding-bottom: 20px;
+        }
+        .modal-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        .modal-description {
+            margin-bottom: 10px;
+        }
+        .modal-price {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .modal-size-chart {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .modal-add-to-cart {
+            background-color: #333;
+            color: white;
+            padding: 12px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            font-size: 1em;
+        }
+        .modal-add-to-cart:hover {
+            background-color: #555;
+        }
+        .modal-size-select {
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Elegant Sarees Collection</h1>
+    </div>
+    <div class="content">
+        <div class="image-gallery">
+            <!-- Saree 1 -->
+            <div class="image-container">
+                <img src="sar1.jpg" alt="Elegant Silk Saree" onclick="openModal('Elegant Silk Saree', 'sar1.jpg', 'An elegant silk saree in vibrant colors.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Elegant Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 2 -->
+            <div class="image-container">
+                <img src="sar2.jpg" alt="Traditional Kanjivaram Saree" onclick="openModal('Traditional Kanjivaram Saree', 'sar2.jpg', 'A traditional Kanjivaram saree with intricate zari work.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Traditional Kanjivaram Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 3 -->
+            <div class="image-container">
+                <img src="sar3.jpg" alt="Designer Georgette Saree" onclick="openModal('Designer Georgette Saree', 'sar3.jpg', 'A designer georgette saree with modern patterns.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Designer Georgette Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 4 -->
+            <div class="image-container">
+                <img src="sar4.jpg" alt="Embroidered Chiffon Saree" onclick="openModal('Embroidered Chiffon Saree', 'sar4.jpg', 'An embroidered chiffon saree with delicate detailing.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Embroidered Chiffon Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 5 -->
+            <div class="image-container">
+                <img src="sar5.jpg" alt="Banarasi Silk Saree" onclick="openModal('Banarasi Silk Saree', 'sar5.jpg', 'A classic Banarasi silk saree with rich brocade work.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Banarasi Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 6 -->
+            <div class="image-container">
+                <img src="sar6.jpg" alt="Embroidered Tussar Silk Saree" onclick="openModal('Embroidered Tussar Silk Saree', 'sar6.jpg', 'An embroidered Tussar silk saree with intricate thread work.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Embroidered Tussar Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 7 -->
+            <div class="image-container">
+                <img src="sar7.jpg" alt="Printed Linen Saree" onclick="openModal('Printed Linen Saree', 'sar7.jpg', 'A printed linen saree perfect for casual occasions.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Printed Linen Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 8 -->
+            <div class="image-container">
+                <img src="sar8.jpg" alt="Kalamkari Cotton Saree" onclick="openModal('Kalamkari Cotton Saree', 'sar8.jpg', 'A Kalamkari cotton saree depicting traditional art forms.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Kalamkari Cotton Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 9 -->
+            <div class="image-container">
+                <img src="sar9.jpg" alt="Silk Kota Saree" onclick="openModal('Silk Kota Saree', 'sar9.jpg', 'A silk Kota saree known for its light and airy texture.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Silk Kota Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 10 -->
+            <div class="image-container">
+                <img src="sar10.jpg" alt="Embroidered Kantha Silk Saree" onclick="openModal('Embroidered Kantha Silk Saree', 'sar10.jpg', 'An embroidered Kantha silk saree with traditional motifs.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Embroidered Kantha Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 11 -->
+            <div class="image-container">
+                <img src="sar11.jpg" alt="Designer Organza Saree" onclick="openModal('Designer Organza Saree', 'sar11.jpg', 'A designer organza saree with contemporary designs.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Designer Organza Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 12 -->
+            <div class="image-container">
+                <img src="sar12.jpg" alt="Embroidered Zardosi Saree" onclick="openModal('Embroidered Zardosi Saree', 'sar12.jpg', 'An embroidered Zardosi saree with intricate golden work.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Embroidered Zardosi Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 13 -->
+            <div class="image-container">
+                <img src="sar13.jpg" alt="Patola Silk Saree" onclick="openModal('Patola Silk Saree', 'sar13.jpg', 'A Patola silk saree known for its vibrant double ikat patterns.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Patola Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 14 -->
+            <div class="image-container">
+                <img src="sar14.jpg" alt="Chanderi Silk Saree" onclick="openModal('Chanderi Silk Saree', 'sar14.jpg', 'A Chanderi silk saree adorned with delicate motifs.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Chanderi Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 15 -->
+            <div class="image-container">
+                <img src="sar15.jpg" alt="Tussar Banarasi Saree" onclick="openModal('Tussar Banarasi Saree', 'sar15.jpg', 'A Tussar Banarasi saree combining Tussar silk with Banarasi weaving.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Tussar Banarasi Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 16 -->
+            <div class="image-container">
+                <img src="sar16.jpg" alt="Kota Doria Saree" onclick="openModal('Kota Doria Saree', 'sar16.jpg', 'A Kota Doria saree with transparent weave and elegant borders.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Kota Doria Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 17 -->
+            <div class="image-container">
+                <img src="sar17.jpg" alt="Printed Silk Saree" onclick="openModal('Printed Silk Saree', 'sar17.jpg', 'A printed silk saree perfect for festive occasions.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Printed Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 18 -->
+            <div class="image-container">
+                <img src="sar18.jpg" alt="Kalamkari Silk Saree" onclick="openModal('Kalamkari Silk Saree', 'sar18.jpg', 'A Kalamkari silk saree with hand-painted motifs.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Kalamkari Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 19 -->
+            <div class="image-container">
+                <img src="sar19.jpg" alt="Embroidered Kanjeevaram Silk Saree" onclick="openModal('Embroidered Kanjeevaram Silk Saree', 'sar19.jpg', 'An embroidered Kanjeevaram silk saree with rich borders.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Embroidered Kanjeevaram Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 20 -->
+            <div class="image-container">
+                <img src="sar20.jpg" alt="Bhagalpuri Silk Saree" onclick="openModal('Bhagalpuri Silk Saree', 'sar20.jpg', 'A Bhagalpuri silk saree known for its unique texture and prints.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Bhagalpuri Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 21 -->
+            <div class="image-container">
+                <img src="sar21.jpg" alt="Embroidered Chanderi Cotton Saree" onclick="openModal('Embroidered Chanderi Cotton Saree', 'sar21.jpg', 'An embroidered Chanderi cotton saree with elegant borders.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Embroidered Chanderi Cotton Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 22 -->
+            <div class="image-container">
+                <img src="sar22.jpg" alt="Bandhani Saree" onclick="openModal('Bandhani Saree', 'sar22.jpg', 'A Bandhani saree featuring tie and dye technique.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Bandhani Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 23 -->
+            <div class="image-container">
+                <img src="sar23.jpg" alt="Kanjeevaram Cotton Silk Saree" onclick="openModal('Kanjeevaram Cotton Silk Saree', 'sar23.jpg', 'A Kanjeevaram cotton silk saree with contrasting pallu.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Kanjeevaram Cotton Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 24 -->
+            <div class="image-container">
+                <img src="sar24.jpg" alt="Tussar Matka Saree" onclick="openModal('Tussar Matka Saree', 'sar24.jpg', 'A Tussar Matka saree with a natural golden sheen.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Tussar Matka Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 25 -->
+            <div class="image-container">
+                <img src="sar25.jpg" alt="Handloom Linen Saree" onclick="openModal('Handloom Linen Saree', 'sar25.jpg', 'A handloom linen saree for a sophisticated look.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Handloom Linen Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 26 -->
+            <div class="image-container">
+                <img src="sar26.jpg" alt="Kota Silk Saree" onclick="openModal('Kota Silk Saree', 'sar26.jpg', 'A Kota silk saree known for its lightness and fine texture.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Kota Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 27 -->
+            <div class="image-container">
+                <img src="sar27.jpg" alt="Jamdani Silk Saree" onclick="openModal('Jamdani Silk Saree', 'sar27.jpg', 'A Jamdani silk saree with intricate weaving techniques.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Jamdani Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 28 -->
+            <div class="image-container">
+                <img src="sar28.jpg" alt="Paithani Silk Saree" onclick="openModal('Paithani Silk Saree', 'sar28.jpg', 'A Paithani silk saree known for its peacock motifs.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Paithani Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 29 -->
+            <div class="image-container">
+                <img src="sar29.jpg" alt="Embroidered Bhagalpuri Saree" onclick="openModal('Embroidered Bhagalpuri Saree', 'sar29.jpg', 'An embroidered Bhagalpuri saree with rich patterns.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Embroidered Bhagalpuri Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 30 -->
+            <div class="image-container">
+                <img src="sar30.jpg" alt="Kanjeevaram Art Silk Saree" onclick="openModal('Kanjeevaram Art Silk Saree', 'sar30.jpg', 'A Kanjeevaram art silk saree with classic designs.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Kanjeevaram Art Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 31 -->
+            <div class="image-container">
+                <img src="sar31.jpg" alt="Chikankari Silk Saree" onclick="openModal('Chikankari Silk Saree', 'sar31.jpg', 'A Chikankari silk saree with intricate white embroidery.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Chikankari Silk Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+
+            <!-- Saree 32 -->
+            <div class="image-container">
+                <img src="sar32.jpg" alt="Printed Chiffon Saree" onclick="openModal('Printed Chiffon Saree', 'sar32.jpg', 'A printed chiffon saree perfect for formal events.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Printed Chiffon Saree</p>
+                    <p class="image-label">Price on Request</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+            </div>
+            <div class="modal-body">
+                <img id="modal-image" src="" alt="Modal Image" class="modal-image">
+                <p class="modal-description" id="modal-description"></p>
+                <p class="modal-price" id="modal-price"></p>
+                <select class="modal-size-select" id="modal-size-select">
+                    <option value="S">Small</option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                    <option value="XL">Extra Large</option>
+                </select>
+                <p class="modal-size-chart">Size Chart: S (36"), M (38"), L (40"), XL (42")</p>
+                <button class="modal-add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Open the modal
+        function openModal(title, imageSrc, description, price) {
+            var modal = document.getElementById('myModal');
+            var modalImage = document.getElementById('modal-image');
+            var modalTitle = document.getElementById('modal-title');
+            var modalDescription = document.getElementById('modal-description');
+            var modalPrice = document.getElementById('modal-price');
+            
+            modal.style.display = "block";
+            modalImage.src = imageSrc;
+            modalTitle.innerHTML = title;
+            modalDescription.innerHTML = description;
+            modalPrice.innerHTML = price;
+        }
+
+        // Close the modal
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+
+        // Close the modal if the user clicks outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

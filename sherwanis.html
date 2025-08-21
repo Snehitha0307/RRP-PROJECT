@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Attire - Sherwanis Collection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(244, 244, 244, 0.8);
+            color: #333;
+            text-align: center;
+            z-index: 1000;
+            padding: 20px 0;
+        }
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        .content {
+            margin-top: 120px;
+            padding: 20px;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+        .image-container {
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+        .image-caption {
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+        .image-label {
+            font-size: 0.8em;
+            color: #777;
+            margin-bottom: 8px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .modal-header {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .modal-header h2 {
+            margin: 0;
+        }
+        .modal-body {
+            padding-bottom: 20px;
+        }
+        .modal-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        .modal-description {
+            margin-bottom: 10px;
+        }
+        .modal-price {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .modal-size-chart {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .modal-add-to-cart {
+            background-color: #333;
+            color: white;
+            padding: 12px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            font-size: 1em;
+        }
+        .modal-add-to-cart:hover {
+            background-color: #555;
+        }
+        .modal-size-select {
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Royal Attire - Sherwanis Collection</h1>
+    </div>
+    <div class="content">
+        <div class="image-gallery">
+            <!-- Sherwani 1 -->
+            <div class="image-container">
+                <img src="she1.jpg" alt="Elegant Ivory Sherwani" onclick="openModal('Elegant Ivory Sherwani', 'she1.jpg', 'An elegant ivory Sherwani perfect for weddings and special occasions.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Elegant Ivory Sherwani</p>
+                    <p class="image-label">INR:390000</P>
+                </div>
+            </div>
+
+            <!-- Sherwani 2 -->
+            <div class="image-container">
+                <img src="she2.jpg" alt="Glanced Glaze Sherwani" onclick="openModal('Glanced Glaze Sherwani', 'she2.jpg', 'A stylish and modern Sherwani with a glanced glaze finish.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Glanced Glaze Sherwani</p>
+                    <p class="image-label">INR:278900</P>
+                </div>
+            </div>
+
+            <!-- Sherwani 3 -->
+            <div class="image-container">
+                <img src="she3.jpg" alt="Regal Red Sherwani" onclick="openModal('Regal Red Sherwani', 'she3.jpg', 'A regal red Sherwani adorned with intricate embroidery.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Regal Red Sherwani</p>
+                    <p class="image-label">INR:390000</P>
+                </div>
+            </div>
+
+            <!-- Sherwani 4 -->
+            <div class="image-container">
+                <img src="she4.jpg" alt="Classic Black Sherwani" onclick="openModal('Classic Black Sherwani', 'she4.jpg', 'A classic black Sherwani with a contemporary touch.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Classic Black Sherwani</p>
+                    <p class="image-label">INR:1999999</P>
+                </div>
+            </div>
+
+            <!-- Sherwani 5 -->
+            <div class="image-container">
+                <img src="she5.jpg" alt="Royal Blue Sherwani" onclick="openModal('Royal Blue Sherwani', 'she5.jpg', 'A royal blue Sherwani crafted for elegance and sophistication.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Royal Blue Sherwani</p>
+                    <p class="image-label">INR:189000</P>
+                </div>
+            </div>
+
+         
+            <!-- Sherwani 7 -->
+            <div class="image-container">
+                <img src="she7.jpg" alt="Traditional White Sherwani" onclick="openModal('Traditional White Sherwani', 'she7.jpg', 'A traditional white Sherwani with a contemporary twist.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Traditional White Sherwani</p>
+                    <p class="image-label">
+                </div>
+            </div>
+
+            <!-- Sherwani 8 -->
+            <div class="image-container">
+                <img src="she8.jpg" alt="Stylish Navy Blue Sherwani" onclick="openModal('Stylish Navy Blue Sherwani', 'she8.jpg', 'A stylish navy blue Sherwani perfect for modern grooms.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Stylish Navy Blue Sherwani</p>
+                    <p class="image-label">INR;19000</P>
+                </div>
+            </div>
+
+            <!-- Sherwani 9 -->
+            <div class="image-container">
+                <img src="she9.jpg" alt="Embroidered Peach Sherwani" onclick="openModal('Embroidered Peach Sherwani', 'she9.jpg', 'An embroidered peach Sherwani with intricate detailing.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Embroidered Peach Sherwani</p>
+                    <p class="image-label">INR:1999999</P>
+                </div>
+            </div>
+
+            <!-- Sherwani 10 -->
+            <div class="image-container">
+                <img src="she10.jpg" alt="Exquisite Velvet Sherwani" onclick="openModal('Exquisite Velvet Sherwani', 'she10.jpg', 'An exquisite velvet Sherwani for a luxurious feel.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Exquisite Velvet Sherwani</p>
+                    <p class="image-label">INR:200000</P>
+                </div>
+            </div>
+
+            <!-- Sherwani 11 -->
+            <div class="image-container">
+                <img src="she11.jpg" alt="Ethnic Floral Sherwani" onclick="openModal('Ethnic Floral Sherwani', 'she11.jpg', 'An ethnic floral Sherwani that combines tradition with style.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Ethnic Floral Sherwani</p>
+                    <p class="image-label">INR:35000</P>
+                </div>
+            </div>
+
+            <!-- Sherwani 12 -->
+            <div class="image-container">
+                <img src="she12.jpg" alt="Classic Beige Sherwani" onclick="openModal('Classic Beige Sherwani', 'she12.jpg', 'A classic beige Sherwani for a timeless look.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Classic Beige Sherwani</p>
+                    <p class="image-label">INR:400000</P>
+                </div>
+            </div>
+
+            
+            <!-- Sherwani 14 -->
+            <div class="image-container">
+                <img src="she14.jpg" alt="Golden Embroidered Sherwani" onclick="openModal('Golden Embroidered Sherwani', 'she14.jpg', 'A golden embroidered Sherwani with intricate detailing.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Golden Embroidered Sherwani</p>
+                    <p class="image-label">INR:290000</P>
+                </div>
+            </div>
+
+            <!-- Sherwani 15 -->
+            <div class="image-container">
+                <img src="she15.jpg" alt="Royal Blue Sherwani" onclick="openModal('Royal Blue Sherwani', 'she15.jpg', 'A royal blue Sherwani with intricate embroidery.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Royal Blue Sherwani</p>
+                    <p class="image-label">INR:30000 /p>
+                </div>
+            </div>
+
+            <!-- Sherwani 16 -->
+            <div class="image-container">
+                <img src="she16.jpg" alt="Classic Beige Sherwani" onclick="openModal('Classic Beige Sherwani', 'she16.jpg', 'A classic beige Sherwani with minimalistic design.', 'Price on Request')">
+                <div class="image-caption">
+                    <p>Classic Beige Sherwani</p>
+                    <p class="image-label">INR:26000</P>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+            </div>
+            <div class="modal-body">
+                <img src="" alt="" id="modal-image" class="modal-image">
+                <p class="modal-description" id="modal-description"></p>
+                <p class="modal-price" id="modal-price"></p>
+                <div class="modal-size-chart">
+                    <label for="sizeChart">Size:</label>
+                    <select id="sizeChart" class="modal-size-select">
+                        <option value="Small">Small</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Large">Large</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+                </div>
+                <button class="modal-add-to-cart" onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(name, image, description, price) {
+            document.getElementById('modal-title').textContent = name;
+            document.getElementById('modal-image').src = image;
+            document.getElementById('modal-description').textContent = description;
+            document.getElementById('modal-price').textContent = `Price: ${price}`;
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function addToCart() {
+            alert('Item added to cart!');
+            closeModal();
+        }
+
+        // Close modal if clicked outside of modal content
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('modal')) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+</html>
